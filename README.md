@@ -1,5 +1,11 @@
 # bs-fetch
 
+## Fork Notes
+
+This fork provides the upstreams `next` branch on master as `FetchNext.re`. I suppose it can be used as `module Fetch = FetchNext` if you wanted to use it as a drop-in replacement.
+
+Bindings are also in `reason` syntax.
+
 Low-level bindings to fetch for [BuckleScript](https://github.com/bucklescript/bucklescript).
 
 [![npm](https://img.shields.io/npm/v/bs-fetch.svg)](https://npmjs.org/bs-fetch)
@@ -38,7 +44,7 @@ See usage examples in [`ocaml_examples.ml`](https://github.com/reasonml-communit
 
 ## Node.js polyfill
 
-`fetch` is a Web API that isn't available out-of-the-box in Node.js, and will therefore need to be polyfilled. [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) one such polyfill that seems to work well. Just install it via npm and add `[%raw "require('isomorphic-fetch')"]` to the top of your main file, but be aware that there are some subtle differences and even parts that are missing entirely. 
+`fetch` is a Web API that isn't available out-of-the-box in Node.js, and will therefore need to be polyfilled. [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) one such polyfill that seems to work well. Just install it via npm and add `[%raw "require('isomorphic-fetch')"]` to the top of your main file, but be aware that there are some subtle differences and even parts that are missing entirely.
 
 ## Changes
 
