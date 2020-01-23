@@ -110,12 +110,12 @@ module Headers: {
   type t = headers;
   [@bs.new] external make : t = "Headers";
   [@bs.new] external makeWithInit : headersInit => t = "Headers";
-  [@bs.send.pipe : t] external append : (string, string) => unit = "";
-  [@bs.send.pipe : t] external delete : string => unit = "" /* very experimental */; /* entries */
+  [@bs.send.pipe : t] external append : (string, string) => unit = "append";
+  [@bs.send.pipe : t] external delete : string => unit = "delete" /* very experimental */; /* entries */
   [@bs.send.pipe : t] [@bs.return {null_to_opt: null_to_opt}]
-  external get : string => option(string) = "";
-  [@bs.send.pipe : t] external has : string => bool = "" /* very experimental */; /* keys */
-  [@bs.send.pipe : t] external set : (string, string) => unit = "" /* very experimental */; /* values */
+  external get : string => option(string) = "get";
+  [@bs.send.pipe : t] external has : string => bool = "has" /* very experimental */; /* keys */
+  [@bs.send.pipe : t] external set : (string, string) => unit = "set" /* very experimental */; /* values */
 };
 
 module BodyInit: {
@@ -129,13 +129,13 @@ module BodyInit: {
 
 module Body: {
   type t = body;
-  [@bs.get] external body : t => readableStream = "";
-  [@bs.get] external bodyUsed : t => bool = "";
-  [@bs.send.pipe : t] external arrayBuffer : Js.Promise.t(arrayBuffer) = "";
-  [@bs.send.pipe : t] external blob : Js.Promise.t(blob) = "";
-  [@bs.send.pipe : t] external formData : Js.Promise.t(formData) = "";
-  [@bs.send.pipe : t] external json : Js.Promise.t(Js.Json.t) = "";
-  [@bs.send.pipe : t] external text : Js.Promise.t(string) = "";
+  [@bs.get] external body : t => readableStream = "body";
+  [@bs.get] external bodyUsed : t => bool = "bodyUsed";
+  [@bs.send.pipe : t] external arrayBuffer : Js.Promise.t(arrayBuffer) = "arrayBuffer";
+  [@bs.send.pipe : t] external blob : Js.Promise.t(blob) = "blob";
+  [@bs.send.pipe : t] external formData : Js.Promise.t(formData) = "formData";
+  [@bs.send.pipe : t] external json : Js.Promise.t(Js.Json.t) = "json";
+  [@bs.send.pipe : t] external text : Js.Promise.t(string) = "text";
 };
 
 module RequestInit: {
@@ -164,53 +164,53 @@ module Request: {
   [@bs.new] external makeWithInit : (string, requestInit) => t = "Request";
   [@bs.new] external makeWithRequest : t => t = "Request";
   [@bs.new] external makeWithRequestInit : (t, requestInit) => t = "Request";
-  let method: t => requestMethod;
-  [@bs.get] external url : t => string = "";
-  [@bs.get] external headers : t => headers = "";
+
+  [@bs.get] external url : t => string = "url";
+  [@bs.get] external headers : t => headers = "headers";
   let type_: t => requestType;
   let destination: t => requestDestination;
-  [@bs.get] external referrer : t => string = "";
+  [@bs.get] external referrer : t => string = "referrer";
   let referrerPolicy: t => referrerPolicy;
   let mode: t => requestMode;
   let credentials: t => requestCredentials;
   let cache: t => requestCache;
   let redirect: t => requestRedirect;
-  [@bs.get] external integrity : t => string = "";
-  [@bs.get] external keepalive : t => bool = "";
+  [@bs.get] external integrity : t => string = "integrity";
+  [@bs.get] external keepalive : t => bool = "keepalive";
   /* Body Impl */
-  [@bs.get] external body : t => readableStream = "";
-  [@bs.get] external bodyUsed : t => bool = "";
-  [@bs.send.pipe : t] external arrayBuffer : Js.Promise.t(arrayBuffer) = "";
-  [@bs.send.pipe : t] external blob : Js.Promise.t(blob) = "";
-  [@bs.send.pipe : t] external formData : Js.Promise.t(formData) = "";
-  [@bs.send.pipe : t] external json : Js.Promise.t(Js.Json.t) = "";
-  [@bs.send.pipe : t] external text : Js.Promise.t(string) = "";
+  [@bs.get] external body : t => readableStream = "body";
+  [@bs.get] external bodyUsed : t => bool = "bodyUsed";
+  [@bs.send.pipe : t] external arrayBuffer : Js.Promise.t(arrayBuffer) = "arrayBuffer";
+  [@bs.send.pipe : t] external blob : Js.Promise.t(blob) = "blob";
+  [@bs.send.pipe : t] external formData : Js.Promise.t(formData) = "formData";
+  [@bs.send.pipe : t] external json : Js.Promise.t(Js.Json.t) = "json";
+  [@bs.send.pipe : t] external text : Js.Promise.t(string) = "text";
 };
 
 module Response: {
   type t = response;
-  [@bs.val] external error : unit => t = "";
-  [@bs.val] external redirect : string => t = "";
+  [@bs.val] external error : unit => t = "error";
+  [@bs.val] external redirect : string => t = "redirect";
   [@bs.val] external redirectWithStatus : (string, int /* enum-ish */) => t = "redirect";
-  [@bs.get] external headers : t => headers = "";
-  [@bs.get] external ok : t => bool = "";
-  [@bs.get] external redirected : t => bool = "";
-  [@bs.get] external status : t => int = "";
-  [@bs.get] external statusText : t => string = "";
-  [@bs.get] external _type : t => string = "";
-  [@bs.get] external url : t => string = "";
-  [@bs.send.pipe : t] external clone : t = "";
+  [@bs.get] external headers : t => headers = "headers";
+  [@bs.get] external ok : t => bool = "ok";
+  [@bs.get] external redirected : t => bool = "redirected";
+  [@bs.get] external status : t => int = "status";
+  [@bs.get] external statusText : t => string = "statusText";
+  [@bs.get] external _type : t => string = "type";
+  [@bs.get] external url : t => string = "url";
+  [@bs.send.pipe : t] external clone : t = "clone";
   /* Body.Impl */
-  [@bs.get] external body : t => readableStream = "";
-  [@bs.get] external bodyUsed : t => bool = "";
-  [@bs.send.pipe : t] external arrayBuffer : Js.Promise.t(arrayBuffer) = "";
-  [@bs.send.pipe : t] external blob : Js.Promise.t(blob) = "";
-  [@bs.send.pipe : t] external formData : Js.Promise.t(formData) = "";
-  [@bs.send.pipe : t] external json : Js.Promise.t(Js.Json.t) = "";
-  [@bs.send.pipe : t] external text : Js.Promise.t(string) = "";
+  [@bs.get] external body : t => readableStream = "body";
+  [@bs.get] external bodyUsed : t => bool = "bodyUsed";
+  [@bs.send.pipe : t] external arrayBuffer : Js.Promise.t(arrayBuffer) = "arrayBuffer";
+  [@bs.send.pipe : t] external blob : Js.Promise.t(blob) = "blob";
+  [@bs.send.pipe : t] external formData : Js.Promise.t(formData) = "formData";
+  [@bs.send.pipe : t] external json : Js.Promise.t(Js.Json.t) = "json";
+  [@bs.send.pipe : t] external text : Js.Promise.t(string) = "text";
 };
 
-[@bs.val] external fetch : string => Js.Promise.t(response) = "";
+[@bs.val] external fetch : string => Js.Promise.t(response) = "fetch";
 
 [@bs.val] external fetchWithInit : (string, requestInit) => Js.Promise.t(response) = "fetch";
 

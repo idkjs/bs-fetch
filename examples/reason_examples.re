@@ -9,7 +9,7 @@ let _ =
   Js.Promise.(
     Fetch.fetchWithInit(
       "/api/hello",
-      Fetch.RequestInit.make(~method_=Post, ()),
+      Fetch.RequestInit.make(~method__=Post, ()),
     )
     |> then_(Fetch.Response.text)
     |> then_(text => print_endline(text) |> resolve)
@@ -37,7 +37,7 @@ let _ = {
     Fetch.fetchWithInit(
       "/api/hello",
       Fetch.RequestInit.make(
-        ~method_=Post,
+        ~method__=Post,
         ~body=Fetch.BodyInit.make(Js.Json.stringify(Js.Json.object_(payload))),
         ~headers=Fetch.HeadersInit.make({"Content-Type": "application/json"}),
         ()

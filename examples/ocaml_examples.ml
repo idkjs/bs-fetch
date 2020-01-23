@@ -7,7 +7,7 @@ let _ =
 
 let _ =
   Js.Promise.(
-    Fetch.fetchWithInit "/api/hello" (Fetch.RequestInit.make ~method_:Post ())
+    Fetch.fetchWithInit "/api/hello" (Fetch.RequestInit.make ~method__:Post ())
     |> then_ Fetch.Response.text
     |> then_ (fun text -> print_endline text |> resolve)
   )
@@ -31,7 +31,7 @@ let _ =
   Js.Dict.set payload "hello" (Js.Json.string "world");
   let open Js.Promise in
     (Fetch.fetchWithInit "/api/hello"
-       (Fetch.RequestInit.make ~method_:Post
+       (Fetch.RequestInit.make ~method__:Post
           ~body:(Fetch.BodyInit.make
                    (Js.Json.stringify (Js.Json.object_ payload)))
           ~headers:(Fetch.HeadersInit.makeWithDict (Js.Dict.fromList [
